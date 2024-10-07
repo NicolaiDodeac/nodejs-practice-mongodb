@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { env } from '../utils/env.js';
-// const mongoose = require('mongoose');
 
 export const initMongoConnection = async () => {
   try {
