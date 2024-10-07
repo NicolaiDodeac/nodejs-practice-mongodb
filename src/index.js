@@ -1,25 +1,6 @@
-import express from 'express';
-import cors from 'cors';
+import { setupServer } from './server.js';
 
-import contacts from './db/contacts.js';
-const app = express();
-const PORT = 3000;
-
-app.use(cors());
-
-// app.use((reg, res, next) => {
-//   console.log('first middleware');
-//   next();
-// });
-// app.use((reg, res, next) => {
-//   console.log('second middleware');
-//   next();
-// });
-
-app.get('/contacts', (req, res) => {
-  res.json(contacts);
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const bootStrap = () => {
+  setupServer();
+};
+bootStrap();
