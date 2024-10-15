@@ -1,6 +1,5 @@
-// src/db/models/student.js
-
 import { Schema, model } from 'mongoose';
+import { typeList } from '../../constants/students.js';
 
 const studentSchema = new Schema(
   {
@@ -15,7 +14,7 @@ const studentSchema = new Schema(
     gender: {
       type: String,
       required: true,
-      enum: ['male', 'female', 'other'],
+      enum: typeList,
     },
     avgMark: {
       type: Number,
