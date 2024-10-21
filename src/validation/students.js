@@ -25,17 +25,3 @@ export const updateStudentSchema = Joi.object({
   avgMark: Joi.number().min(2).max(12),
   onDuty: Joi.boolean(),
 });
-
-// const validationResult = createStudentSchema.validate(userData, {
-//   abortEarly: false,
-// });
-// const userData =
-
-// const validationResult = createStudentSchema.validate(userData, {
-//   abortEarly: false,
-// });
-// if (validationResult.error) {
-//   console.error(validationResult.error.message);
-// } else {
-//   console.log('Data is valid!');
-// }
