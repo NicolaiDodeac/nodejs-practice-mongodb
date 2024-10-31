@@ -3,10 +3,10 @@ import { typeList } from '../constants/students.js';
 
 export const createStudentSchema = Joi.object({
   name: Joi.string().min(3).max(30).required().messages({
-    'string.base': 'Username should be a string',
-    'string.min': 'Username should have at least {3} characters',
-    'string.max': 'Username should have at most {30} characters',
-    'any.required': 'Username is required',
+    'string.base': 'name should be a string',
+    'string.min': 'name should have at least {3} characters',
+    'string.max': 'name should have at most {30} characters',
+    'any.required': 'name is required',
   }),
   email: Joi.string().email().required(),
   age: Joi.number().integer().min(6).max(16).required(),
@@ -15,6 +15,7 @@ export const createStudentSchema = Joi.object({
     .required(),
   avgMark: Joi.number().min(2).max(12).required(),
   onDuty: Joi.boolean(),
+  parentId: Joi.string().required(),
 });
 
 export const updateStudentSchema = Joi.object({

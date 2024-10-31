@@ -1,13 +1,11 @@
 import express from 'express';
 // import pino from 'pino-http';
 import cors from 'cors';
-
-import studentsRouter from './routers/students.js';
+import router from './routers/index.js';
 import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
-// import { validateBody } from './middlewares/validationHandler.js';
-// import { isValidId } from './middlewares/isValidIdHandler.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = Number(env('PORT', '5000'));
 
@@ -16,7 +14,7 @@ export const setupServer = () => {
 
   app.use(express.json());
   app.use(cors());
-
+  app.use(cookieParser());
   // app.use(
   //   pino({
   //     transport: {
@@ -31,11 +29,7 @@ export const setupServer = () => {
     });
   });
 
-  app.use(studentsRouter);
-
-  // app.use(validateBody);
-
-  // app.use(isValidId);
+  app.use(router);
 
   app.use('*', notFoundHandler);
 

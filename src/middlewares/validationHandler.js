@@ -4,7 +4,7 @@ export const validateBody = (schema) => async (req, res, next) => {
   try {
     await schema.validateAsync(req.body, {
       abortEarly: false,
-      allowUnknown: false, // Optional: Disallow unknown keys
+      allowUnknown: false,
     });
     next();
   } catch (err) {

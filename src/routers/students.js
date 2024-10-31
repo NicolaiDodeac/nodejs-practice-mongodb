@@ -7,41 +7,56 @@ import {
   updateStudentSchema,
 } from '../validation/students.js';
 import { isValidId } from '../middlewares/isValidIdHandler.js';
+import { authenticate } from '../middlewares/authenticate.js';
+import { checkRoles } from '../middlewares/checkRoles.js';
+import { ROLES } from '../constants/index.js';
 
-const Studentsrouter = Router();
+const studentsRouter = Router();
 
-Studentsrouter.get(
-  '/students',
+studentsRouter.use(authenticate);
+
+studentsRouter.get(
+  '/',
+  checkRoles(ROLES.TEACHER),
   ctrlWrapper(studentsController.getStudentsController),
 );
-Studentsrouter.get(
-  '/students/:id',
+studentsRouter.get(
+  '/:id',
+  checkRoles(ROLES.TEACHER, ROLES.PARENT),
   isValidId,
   ctrlWrapper(studentsController.getStudentByIdController),
 );
-Studentsrouter.post(
-  '/students',
+studentsRouter.post(
+  '/register',
+  validateBody(createStudentSchema),
+  ctrlWrapper(studentsController.postStudentController),
+);
+studentsRouter.post(
+  '/',
+  checkRoles(ROLES.TEACHER),
   validateBody(createStudentSchema),
   ctrlWrapper(studentsController.postStudentController),
 );
 
-Studentsrouter.patch(
-  '/students/:id',
+studentsRouter.patch(
+  '/:id',
+  checkRoles(ROLES.TEACHER, ROLES.PARENT),
   validateBody(updateStudentSchema),
   ctrlWrapper(studentsController.patchStudentController),
 );
-
-Studentsrouter.delete(
-  '/students/:id',
-  isValidId,
-  ctrlWrapper(studentsController.deleteStudentController),
-);
-
-Studentsrouter.put(
-  '/students/:id',
+studentsRouter.put(
+  '/:id',
+  checkRoles(ROLES.TEACHER),
   isValidId,
   validateBody(createStudentSchema),
   ctrlWrapper(studentsController.upsertStudentController),
 );
 
-export default Studentsrouter;
+studentsRouter.delete(
+  '/:id',
+  checkRoles(ROLES.TEACHER),
+  isValidId,
+  ctrlWrapper(studentsController.deleteStudentController),
+);
+
+export default studentsRouter;
