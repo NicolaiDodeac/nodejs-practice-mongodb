@@ -15,7 +15,7 @@ export const createStudentSchema = Joi.object({
     .required(),
   avgMark: Joi.number().min(2).max(12).required(),
   onDuty: Joi.boolean(),
-  parentId: Joi.string().required(),
+  parentId: Joi.string(),
 });
 
 export const updateStudentSchema = Joi.object({

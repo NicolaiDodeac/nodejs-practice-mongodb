@@ -5,4 +5,5 @@ const bootStrap = async () => {
   await initMongoConnection();
   setupServer();
 };
+
 bootStrap();
