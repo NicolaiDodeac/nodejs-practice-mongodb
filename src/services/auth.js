@@ -13,7 +13,6 @@ import {
   ONE_DAY,
   SMTP,
   TEMPLATES_DIR,
-  // JWT_SECRET,
 } from '../constants/index.js';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendMail.js';

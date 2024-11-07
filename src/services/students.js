@@ -2,7 +2,6 @@ import { SORT_ORDER } from '../constants/students.js';
 import StudentsCollection from '../db/models/Students.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
-// export const getAllStudents = () => StudentsCollection.find();
 export const getAllStudents = async ({
   page = 1,
   perPage = 10,
@@ -29,16 +28,6 @@ export const getAllStudents = async ({
   if (filter.minAvgMark) {
     studentsQuery.where('avgMark').gte(filter.minAvgMark);
   }
-
-  // const studentsCount = await StudentsCollection.find()
-  //   .merge(studentsQuery)
-  //   .countDocuments();
-
-  // const students = await studentsQuery
-  //   .skip(skip)
-  //   .limit(limit)
-  //   .sort({ [sortBy]: sortOrder })
-  //   .exec();
 
   const [studentsCount, students] = await Promise.all([
     StudentsCollection.find().merge(studentsQuery).countDocuments(),
